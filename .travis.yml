@@ -8,7 +8,7 @@ deploy:
   provider: npm
   email: zinovik@gmail.com
   on:
-    repo: zinovik/node-audio-collection
+    repo: zinovik/node-webcam-telegram
     branch: master
   skip_cleanup: true
   api_key:
