@@ -1,7 +1,7 @@
-[![Build Status](https://travis-ci.org/zinovik/node-spy.svg?branch=master)](https://travis-ci.org/zinovik/node-spy)
+[![Build Status](https://travis-ci.org/zinovik/node-webcam-telegram.svg?branch=master)](https://travis-ci.org/zinovik/node-webcam-telegram)
 
-# node-spy #
+# node-webcam-telegram #
 
 ```bash
- npx node-spy TELEGRAM_TOKEN PASSWORD
+ npx node-webcam-telegram TELEGRAM_TOKEN PASSWORD
 ```
