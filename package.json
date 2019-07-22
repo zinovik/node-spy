@@ -1,7 +1,7 @@
 {
   "name": "node-webcam-telegram",
   "version": "0.0.1",
-  "description": "node spy",
+  "description": "node webcam telegram",
   "main": "lib/index.js",
   "bin": {
     "node-webcam-telegram": "./lib/index.js"
