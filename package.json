@@ -1,10 +1,10 @@
 {
-  "name": "node-spy",
+  "name": "node-webcam-telegram",
   "version": "0.0.1",
   "description": "node spy",
   "main": "lib/index.js",
   "bin": {
-    "node-spy": "./lib/index.js"
+    "node-webcam-telegram": "./lib/index.js"
   },
   "types": "lib/index.d.ts",
   "scripts": {
@@ -23,14 +23,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/zinovik/node-spy.git"
+    "url": "git+https://github.com/zinovik/node-webcam-telegram.git"
   },
   "author": "Max Zinovik",
   "license": "Apache-2.0",
   "bugs": {
-    "url": "https://github.com/zinovik/node-spy/issues"
+    "url": "https://github.com/zinovik/node-webcam-telegram/issues"
   },
-  "homepage": "https://github.com/zinovik/node-spy#readme",
+  "homepage": "https://github.com/zinovik/node-webcam-telegram#readme",
   "devDependencies": {
     "@types/jest": "^24.0.15",
     "@types/node": "^12.6.8",
