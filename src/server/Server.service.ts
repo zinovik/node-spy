@@ -1,4 +1,5 @@
 import { createServer, ServerOptions } from 'http';
+// tslint:disable-next-line
 const ngrok = require('ngrok');
 
 import { IServerService } from './IServerService.interface';
