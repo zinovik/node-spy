@@ -1,6 +1,6 @@
 {
   "name": "node-webcam-telegram",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "node webcam telegram",
   "main": "lib/index.js",
   "bin": {
@@ -11,8 +11,8 @@
     "build": "tsc",
     "start": "ts-node src/index.ts",
     "test": "jest --config jestconfig.json --collectCoverage",
-    "format": "prettier --write \"src/**/*.ts\" \"src/**/*.js\"",
-    "lint": "tslint -p tsconfig.json",
+    "format": "prettier --write \"src/**/*.ts*\" \"test*/**/*.ts*\"",
+    "lint": "tslint -p tsconfig.json -c tslint.json",
     "prepare": "npm run build",
     "prepublishOnly": "npm test && npm run lint",
     "preversion": "npm run lint"

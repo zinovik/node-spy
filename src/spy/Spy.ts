@@ -34,10 +34,7 @@ export class Spy implements ISpy {
           }
 
           await this.webcamService.makePhoto(FILE_NAME);
-          await this.telegramService.sendPhoto(
-            bodyParsed.message.from.id,
-            `${this.configuration.currentPath}/${FILE_NAME}.jpg`,
-          );
+          await this.telegramService.sendPhoto(bodyParsed.message.from.id, `${this.configuration.currentPath}/${FILE_NAME}.jpg`);
 
           (response as any).write('Hello World!');
           (response as any).end();

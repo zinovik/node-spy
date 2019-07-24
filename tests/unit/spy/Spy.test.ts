@@ -25,13 +25,7 @@ describe('Spy', () => {
       password: 'test-pass',
     };
 
-    spy = new Spy(
-      configuration,
-      serverServiceMock.object,
-      webcamServiceMock.object,
-      telegramServiceMock.object,
-      fileSystemServiceMock.object,
-    );
+    spy = new Spy(configuration, serverServiceMock.object, webcamServiceMock.object, telegramServiceMock.object, fileSystemServiceMock.object);
   });
 
   afterEach(() => {
