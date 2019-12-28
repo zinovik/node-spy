@@ -1,6 +1,6 @@
 {
   "name": "node-webcam-telegram",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "node webcam telegram",
   "main": "lib/index.js",
   "bin": {
@@ -12,7 +12,7 @@
     "start": "ts-node src/index.ts",
     "test": "jest --config jestconfig.json --collectCoverage",
     "format": "prettier --write \"src/**/*.ts*\" \"test*/**/*.ts*\"",
-    "lint": "tslint -p tsconfig.json -c tslint.json",
+    "lint": "eslint . --ext .ts",
     "prepare": "npm run build",
     "prepublishOnly": "npm test && npm run lint",
     "preversion": "npm run lint"
@@ -32,23 +32,25 @@
   },
   "homepage": "https://github.com/zinovik/node-webcam-telegram#readme",
   "devDependencies": {
-    "@types/jest": "^24.0.15",
-    "@types/node": "^12.6.8",
-    "jest": "^24.8.0",
-    "prettier": "^1.18.2",
-    "ts-jest": "^24.0.2",
-    "tslint": "^5.18.0",
-    "tslint-config-prettier": "^1.18.0",
+    "@types/jest": "^24.0.25",
+    "@types/node": "^13.1.1",
+    "@typescript-eslint/eslint-plugin": "^2.13.0",
+    "@typescript-eslint/parser": "^2.13.0",
+    "eslint": "^6.8.0",
+    "eslint-config-prettier": "^6.9.0",
+    "jest": "^24.9.0",
+    "prettier": "^1.19.1",
+    "ts-jest": "^24.2.0",
     "typemoq": "^2.1.0",
-    "typescript": "^3.5.3"
+    "typescript": "^3.7.4"
   },
   "dependencies": {
     "axios": "^0.19.0",
-    "form-data": "^2.5.0",
+    "form-data": "^3.0.0",
     "moment": "^2.24.0",
-    "ngrok": "^3.2.3",
+    "ngrok": "^3.2.7",
     "node-webcam": "^0.5.0",
-    "ts-node": "^8.3.0"
+    "ts-node": "^8.5.4"
   },
   "files": [
     "lib/**/*"

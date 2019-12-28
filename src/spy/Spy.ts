@@ -45,6 +45,6 @@ export class Spy implements ISpy {
     console.log(url);
 
     await this.telegramService.setWebhook(url);
-    await this.fileSystemService.removeFile(process.cwd() + `${this.configuration.currentPath}/${FILE_NAME}.jpg`);
+    await this.fileSystemService.removeFile(`${this.configuration.currentPath}/${FILE_NAME}.jpg`);
   }
 }

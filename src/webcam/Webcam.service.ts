@@ -1,4 +1,4 @@
-// tslint:disable-next-line
+// eslint-disable-next-line @typescript-eslint/no-var-requires
 const NodeWebcam = require('node-webcam');
 
 import { IWebcamService } from './IWebcamService.interface';
