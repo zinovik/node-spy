@@ -1,6 +1,6 @@
 {
   "name": "node-webcam-telegram",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "node webcam telegram",
   "main": "lib/index.js",
   "bin": {
@@ -33,19 +33,19 @@
   "homepage": "https://github.com/zinovik/node-webcam-telegram#readme",
   "devDependencies": {
     "@types/jest": "^24.0.25",
-    "@types/node": "^13.1.1",
-    "@typescript-eslint/eslint-plugin": "^2.13.0",
-    "@typescript-eslint/parser": "^2.13.0",
+    "@types/node": "^13.1.4",
+    "@typescript-eslint/eslint-plugin": "^2.15.0",
+    "@typescript-eslint/parser": "^2.15.0",
     "eslint": "^6.8.0",
     "eslint-config-prettier": "^6.9.0",
     "jest": "^24.9.0",
     "prettier": "^1.19.1",
-    "ts-jest": "^24.2.0",
+    "ts-jest": "^24.3.0",
     "typemoq": "^2.1.0",
     "typescript": "^3.7.4"
   },
   "dependencies": {
-    "axios": "^0.19.0",
+    "axios": "^0.19.1",
     "form-data": "^3.0.0",
     "moment": "^2.24.0",
     "ngrok": "^3.2.7",
