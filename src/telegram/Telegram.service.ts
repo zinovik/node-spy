@@ -11,7 +11,17 @@ export class TelegramService implements ITelegramService {
     this.token = token;
   }
 
-  async sendPhoto(chatId: number | string, photoPath: string) {
+  async getUpdates(offset?: number): Promise<void> {
+    await axios.post(
+      `${TELEGRAM_API_URL}${this.token}/getUpdates`,
+      { offset, timeout: 20 },
+      {
+        headers: { 'Content-Type': 'application/json' },
+      },
+    );
+  }
+
+  async sendPhoto(chatId: number | string, photoPath: string): Promise<void> {
     const formData = new FormData();
     formData.append('chat_id', chatId);
     formData.append('photo', (fs as any).createReadStream(photoPath));
