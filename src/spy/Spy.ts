@@ -9,15 +9,26 @@ import { ISpyConfiguration } from '../common/model/ISpyConfiguration.interface';
 const FILE_NAME = 'photo';
 
 export class Spy implements ISpy {
+  private oldWebhook: string;
+  private isRun: boolean;
+
   constructor(
     private configuration: ISpyConfiguration,
     private serverService: IServerService,
     private webcamService: IWebcamService,
     private telegramService: ITelegramService,
     private fileSystemService: IFileSystemService,
-  ) {}
+  ) {
+    this.isRun = true;
+  }
 
   async start(): Promise<void> {
+    this.oldWebhook = await this.telegramService.getWebhookUrl();
+
+    // while (this.isRun) {
+    //   //
+    // }
+
     const requestListener = async (request: Request, response: Response): Promise<void> => {
       const body: Uint8Array[] = [];
       (request as any)
@@ -49,5 +60,12 @@ export class Spy implements ISpy {
     console.log(url);
 
     await this.telegramService.setWebhook(url);
+  }
+
+  async stop(): Promise<void> {
+    this.isRun = false;
+
+    this.serverService.stopServer();
+    await this.telegramService.setWebhook(this.oldWebhook);
   }
 }

@@ -3,6 +3,7 @@ import * as fs from 'fs';
 import * as FormData from 'form-data';
 
 import { ITelegramService } from './ITelegramService.interface';
+import { IGetWebhookInfo } from './IGetWebhookInfo.interface';
 
 const TELEGRAM_API_URL = 'https://api.telegram.org/bot';
 
@@ -31,6 +32,12 @@ export class TelegramService implements ITelegramService {
         'Content-Type': `multipart/form-data; boundary=${(formData as any)._boundary}`,
       },
     });
+  }
+
+  async getWebhookUrl(): Promise<string> {
+    const { data }: { data: IGetWebhookInfo } = await axios.post(`${TELEGRAM_API_URL}${this.token}/getWebhookInfo`);
+
+    return data.result.url;
   }
 
   async setWebhook(url: string): Promise<void> {
