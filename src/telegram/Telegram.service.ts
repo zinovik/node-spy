@@ -3,23 +3,38 @@ import * as fs from 'fs';
 import * as FormData from 'form-data';
 
 import { ITelegramService } from './ITelegramService.interface';
-import { IGetWebhookInfo } from './IGetWebhookInfo.interface';
+import { IGetWebhookInfoResult } from './IGetWebhookInfoResult.interface';
+import { IGetUpdatesResult } from './IGetUpdatesResult.interface';
+import { IMessageBody } from '../common/model/IMessageBody.interface';
 
 const TELEGRAM_API_URL = 'https://api.telegram.org/bot';
 
 export class TelegramService implements ITelegramService {
-  constructor(private readonly token: string) {
+  private offset: number;
+
+  constructor(private readonly token: string, private readonly timeout: number) {
     this.token = token;
+    this.timeout = timeout;
+
+    this.offset = 0;
   }
 
-  async getUpdates(offset?: number): Promise<void> {
-    await axios.post(
+  async getUpdates(): Promise<IMessageBody[]> {
+    const { data }: { data: IGetUpdatesResult } = await axios.post(
       `${TELEGRAM_API_URL}${this.token}/getUpdates`,
-      { offset, timeout: 20 },
+      { offset: this.offset, timeout: this.timeout },
       {
         headers: { 'Content-Type': 'application/json' },
       },
     );
+
+    const messagesBodies = data.result;
+
+    messagesBodies.forEach(messageBody => console.log(`new message: ${messageBody.message.text}`));
+
+    this.offset = messagesBodies.reduce((acc, messageBody) => Math.max(acc, messageBody.update_id), -1) + 1;
+
+    return messagesBodies;
   }
 
   async sendPhoto(chatId: number | string, photoPath: string): Promise<void> {
@@ -35,7 +50,9 @@ export class TelegramService implements ITelegramService {
   }
 
   async getWebhookUrl(): Promise<string> {
-    const { data }: { data: IGetWebhookInfo } = await axios.post(`${TELEGRAM_API_URL}${this.token}/getWebhookInfo`);
+    const { data }: { data: IGetWebhookInfoResult } = await axios.post(
+      `${TELEGRAM_API_URL}${this.token}/getWebhookInfo`,
+    );
 
     return data.result.url;
   }
