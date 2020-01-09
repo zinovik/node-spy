@@ -27,6 +27,15 @@ const configuration = {
 
 const spy = new Spy(configuration, serverService, webcamService, telegramService, fileSystemService);
 
-(async () => {
+const signals: NodeJS.Signals[] = ['SIGTERM', 'SIGINT'];
+signals.forEach(signal => {
+  process.on(signal, async () => {
+    await spy.stop();
+
+    process.exit(0);
+  });
+});
+
+(async (): Promise<void> => {
   await spy.start();
 })();
