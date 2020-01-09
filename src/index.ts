@@ -1,7 +1,6 @@
 #!/usr/bin/env node
 
 import { Spy } from './spy/Spy';
-import { ServerService } from './server/Server.service';
 import { WebcamService } from './webcam/Webcam.service';
 import { TelegramService } from './telegram/Telegram.service';
 import { FileSystemService } from './file-system/FileSystemService.service';
@@ -15,9 +14,11 @@ if (process.argv[3] === undefined) {
   throw new ConfigParameterNotDefinedError('PASSWORD');
 }
 
-const serverService = new ServerService();
+const DEFAULT_TELEGRAM_TIMEOUT = 60;
+const telegramTimeout = Number(process.argv[4]) || DEFAULT_TELEGRAM_TIMEOUT;
+
 const webcamService = new WebcamService();
-const telegramService = new TelegramService(process.argv[2]);
+const telegramService = new TelegramService(process.argv[2], telegramTimeout);
 const fileSystemService = new FileSystemService();
 
 const configuration = {
@@ -25,7 +26,7 @@ const configuration = {
   password: process.argv[3],
 };
 
-const spy = new Spy(configuration, serverService, webcamService, telegramService, fileSystemService);
+const spy = new Spy(configuration, webcamService, telegramService, fileSystemService);
 
 const signals: NodeJS.Signals[] = ['SIGTERM', 'SIGINT'];
 signals.forEach(signal => {

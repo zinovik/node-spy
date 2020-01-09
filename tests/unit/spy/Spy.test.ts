@@ -1,13 +1,11 @@
-import { IMock, Mock, It, Times } from 'typemoq';
+import { IMock, Mock } from 'typemoq';
 
 import { Spy } from '../../../src/spy/Spy';
-import { IServerService } from '../../../src/server/IServerService.interface';
 import { IWebcamService } from '../../../src/webcam/IWebcamService.interface';
 import { ITelegramService } from '../../../src/telegram/ITelegramService.interface';
 import { IFileSystemService } from '../../../src/file-system/IFileSystemService.interface';
 
 describe('Spy', () => {
-  let serverServiceMock: IMock<IServerService>;
   let webcamServiceMock: IMock<IWebcamService>;
   let telegramServiceMock: IMock<ITelegramService>;
   let fileSystemServiceMock: IMock<IFileSystemService>;
@@ -15,7 +13,6 @@ describe('Spy', () => {
   let spy: Spy;
 
   beforeEach(() => {
-    serverServiceMock = Mock.ofType<IServerService>();
     webcamServiceMock = Mock.ofType<IWebcamService>();
     telegramServiceMock = Mock.ofType<ITelegramService>();
     fileSystemServiceMock = Mock.ofType<IFileSystemService>();
@@ -25,11 +22,10 @@ describe('Spy', () => {
       password: 'test-pass',
     };
 
-    spy = new Spy(configuration, serverServiceMock.object, webcamServiceMock.object, telegramServiceMock.object, fileSystemServiceMock.object);
+    spy = new Spy(configuration, webcamServiceMock.object, telegramServiceMock.object, fileSystemServiceMock.object);
   });
 
   afterEach(() => {
-    serverServiceMock.verifyAll();
     webcamServiceMock.verifyAll();
     telegramServiceMock.verifyAll();
     fileSystemServiceMock.verifyAll();
@@ -39,6 +35,7 @@ describe('Spy', () => {
     // Arrange
 
     // Act
+    await spy.stop();
     await spy.start();
 
     // Assert
