@@ -23,7 +23,9 @@ export class Spy implements ISpy {
   async start(): Promise<void> {
     this.oldWebhook = await this.telegramService.getWebhookUrl();
 
-    await this.telegramService.setWebhook('');
+    if (this.oldWebhook) {
+      await this.telegramService.setWebhook('');
+    }
 
     while (this.isRun) {
       let messagesBodies: IMessageBody[] = [];
@@ -54,6 +56,8 @@ export class Spy implements ISpy {
   async stop(): Promise<void> {
     this.isRun = false;
 
-    await this.telegramService.setWebhook(this.oldWebhook);
+    if (this.oldWebhook) {
+      await this.telegramService.setWebhook(this.oldWebhook);
+    }
   }
 }
