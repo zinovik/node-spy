@@ -38,10 +38,12 @@ export class Spy implements ISpy {
         await this.webcamService.makePhoto(FILE_NAME);
 
         messagesBodies.forEach(async messageBody => {
-          await this.telegramService.sendPhoto(
-            messageBody.message.from.id,
-            `${this.configuration.currentPath}/${FILE_NAME}.jpg`,
-          );
+          if (messageBody.message.text === this.configuration.password) {
+            await this.telegramService.sendPhoto(
+              messageBody.message.from.id,
+              `${this.configuration.currentPath}/${FILE_NAME}.jpg`,
+            );
+          }
         });
 
         await this.fileSystemService.removeFile(`${this.configuration.currentPath}/${FILE_NAME}.jpg`);
