@@ -33,20 +33,22 @@ export class Spy implements ISpy {
       try {
         messagesBodies = await this.telegramService.getUpdates();
       } catch (error) {
-        console.log(error.message);
+        console.log((error as any).message);
       }
 
-      if (messagesBodies.some(messageBody => messageBody.message.text === this.configuration.password)) {
+      if (messagesBodies.some((messageBody) => messageBody.message.text === this.configuration.password)) {
         await this.webcamService.makePhoto(FILE_NAME);
 
-        messagesBodies.forEach(async messageBody => {
-          if (messageBody.message.text === this.configuration.password) {
-            await this.telegramService.sendPhoto(
-              messageBody.message.from.id,
-              `${this.configuration.currentPath}/${FILE_NAME}.jpg`,
-            );
-          }
-        });
+        await Promise.all(
+          messagesBodies.map(async (messageBody) => {
+            if (messageBody.message.text === this.configuration.password) {
+              await this.telegramService.sendPhoto(
+                messageBody.message.from.id,
+                `${this.configuration.currentPath}/${FILE_NAME}.jpg`,
+              );
+            }
+          }),
+        );
 
         await this.fileSystemService.removeFile(`${this.configuration.currentPath}/${FILE_NAME}.jpg`);
       }
