@@ -1,6 +1,6 @@
 {
   "name": "node-webcam-telegram",
-  "version": "0.0.8",
+  "version": "0.1.0",
   "description": "node webcam telegram",
   "main": "lib/index.js",
   "bin": {
